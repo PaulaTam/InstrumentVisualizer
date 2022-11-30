@@ -138,16 +138,9 @@ function Harmonica({ synth, setSynth }: InstrumentProps): JSX.Element {
     };
 
     const oscillators: List<OscillatorType> = List([
-      'sine',
       'sawtooth',
-      'square',
-      'triangle',
-      'fmsine',
       'fmsawtooth',
-      'fmtriangle',
-      'amsine',
       'amsawtooth',
-      'amtriangle',
     ]) as List<OscillatorType>;
 
     return (
