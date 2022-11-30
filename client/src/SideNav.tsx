@@ -1,7 +1,7 @@
 // 3rd party library imports
 import classNames from 'classnames';
 import { List } from 'immutable';
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import {
   RadioButton20,
@@ -52,6 +52,7 @@ export function SideNav({ state, dispatch }: SideNavProps): JSX.Element {
    * |                 |
    * |-----------------|
   */
+
 
   return (
     <div className="absolute top-0 left-0 bottom-0 w5 z-1 shadow-1 bg-white flex flex-column">
@@ -141,6 +142,15 @@ function VisualizersNav({ state }: SideNavProps): JSX.Element {
   );
 }
 
+// function searchSongs(): JSX.Element {
+//   return (
+//     <div>
+//       <input id="search" name="search" type="text" placeholder="Search for a song..." />
+//       <br />
+//     </div>
+//   );
+// }
+
 function SongsNav({ state, dispatch }: SideNavProps): JSX.Element {
   /** 
    * 
@@ -156,12 +166,74 @@ function SongsNav({ state, dispatch }: SideNavProps): JSX.Element {
    *  |-----------------|
   */
 
+  // Use React hooks to store search input and the filtered list of songs
+  const [inputValue, setInputValue] = useState('');
+  const [searchResult, setSearchResult] = useState(state.get('songs', List()));
+
+
   const songs: List<any> = state.get('songs', List());
   console.log(songs);
 
+
+  // Create a filtered list of songs to display for when there is search input
+  // in the search bar
+  const handleInputChange = (event: any) => {
+    setInputValue(event.target.value.toLowerCase());
+
+    setSearchResult(songs.filter(song => {
+      if (song.get('songTitle').toLowerCase().includes(inputValue) ||
+        song.get('artist').toLowerCase().includes(inputValue) ||
+        song.get('released').includes(inputValue)
+      ) {
+        return song
+      }
+    }));
+  };
+
   return (
     <Section title="Playlist">
-      {songs.map(song => (
+      <input id="searchBar" name="search"
+        onChange={handleInputChange}
+        type="text" placeholder="Search for a song..." />
+      {inputValue?.length === 0 ?
+        <>{
+          songs.map(song => (
+            <div
+              key={song.get('id')}
+              className="f6 pointer underline flex items-center no-underline i dim"
+              onClick={() =>
+                dispatch(new DispatchAction('PLAY_SONG', { id: song.get('id') }))
+              }
+            >
+              <Music20 className="mr1" />
+              {song.get('songTitle')}
+              <br />
+              By: {song.get('artist')}
+              <br />
+              {song.get('released')}
+            </div>
+          ))
+        } </> :
+        <>{
+          searchResult.map((song: any) => (
+            <div
+              key={song.get('id')}
+              className="f6 pointer underline flex items-center no-underline i dim"
+              onClick={() =>
+                dispatch(new DispatchAction('PLAY_SONG', { id: song.get('id') }))
+              }
+            >
+              <Music20 className="mr1" />
+              {song.get('songTitle')}
+              <br />
+              By: {song.get('artist')}
+              <br />
+              {song.get('released')}
+            </div>
+          ))
+        }</>
+      }
+      {/* {songs.map(song => (
         <div
           key={song.get('id')}
           className="f6 pointer underline flex items-center no-underline i dim"
@@ -172,7 +244,7 @@ function SongsNav({ state, dispatch }: SideNavProps): JSX.Element {
           <Music20 className="mr1" />
           {song.get('songTitle')}
         </div>
-      ))}
+      ))} */}
     </Section>
   );
 }
@@ -210,6 +282,7 @@ function RadioButton({ to, text, active, onClick }: RadioButtonProps): JSX.Eleme
     </Link>
   );
 }
+
 
 
 /** ------------------------------------- **

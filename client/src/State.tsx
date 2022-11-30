@@ -5,10 +5,12 @@ import { List, Map } from 'immutable';
 import { PianoInstrument } from './instruments/Piano';
 import { DrumInstrument } from './instruments/Drum';
 import { HarmonicaInstrument } from './instruments/UmarRama-Harmonica';
+import { XylophoneInstrument } from './instruments/PaulaTam-Xylophone';
 
 import { WaveformVisualizer } from './visualizers/Waveform';
 import { EllipticalVisualizer } from './visualizers/harimku';
 import { BarformVisualizer } from './visualizers/UmarRama-Barform';
+import { CircularVisualizer } from './visualizers/PaulaTam-Circular';
 
 /** ------------------------------------------------------------------------ **
  * The entire application state is stored in AppState.
