@@ -72,7 +72,7 @@ export function SideNav({ state, dispatch }: SideNavProps): JSX.Element {
  * SideNav Sub-Components
  ** ------------------------------------------------------------------------ */
 
- function InstrumentsNav({ state }: SideNavProps): JSX.Element {
+function InstrumentsNav({ state }: SideNavProps): JSX.Element {
   /** 
    *  InstrumentsNav
    *  |-----------------|
@@ -85,7 +85,7 @@ export function SideNav({ state, dispatch }: SideNavProps): JSX.Element {
    *  |      ...        |
    *  |-----------------|
   */
-  
+
   const instruments: List<Instrument> = state.get('instruments');
   const activeInstrument = state.get('instrument')?.name;
   const location = useLocation();
@@ -157,6 +157,8 @@ function SongsNav({ state, dispatch }: SideNavProps): JSX.Element {
   */
 
   const songs: List<any> = state.get('songs', List());
+  console.log(songs);
+
   return (
     <Section title="Playlist">
       {songs.map(song => (
@@ -184,7 +186,7 @@ function SongsNav({ state, dispatch }: SideNavProps): JSX.Element {
  * Radio Button
  ** ------------------------------------- */
 
- type RadioButtonProps = {
+type RadioButtonProps = {
   to: any,
   text: string,
   active: boolean,

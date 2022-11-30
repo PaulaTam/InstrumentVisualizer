@@ -14,11 +14,11 @@ export interface InstrumentProps {
   state: AppState;
   dispatch: React.Dispatch<DispatchAction>;
   name: string;
-  synth: Tone.Synth;
-  setSynth: (f: (oldSynth: Tone.Synth) => Tone.Synth) => void;
+  synth: Tone.MembraneSynth;
+  setSynth: (f: (oldSynth: Tone.Synth) => Tone.MembraneSynth) => void;
 }
 
-export class Instrument {
+export class InstrumentDrum {
   public readonly name: string;
   public readonly component: React.FC<InstrumentProps>;
 
@@ -43,7 +43,7 @@ function TopNav({ name }: { name: string }) {
 interface InstrumentContainerProps {
   state: AppState;
   dispatch: React.Dispatch<DispatchAction>;
-  instrument: Instrument;
+  instrument: InstrumentDrum;
 }
 
 export const InstrumentContainer: React.FC<InstrumentContainerProps> = ({
@@ -53,8 +53,17 @@ export const InstrumentContainer: React.FC<InstrumentContainerProps> = ({
 }: InstrumentContainerProps) => {
   const InstrumentComponent = instrument.component;
   const [synth, setSynth] = useState(
-    new Tone.Synth({
-      oscillator: { type: 'sine' } as Tone.OmniOscillatorOptions,
+    new Tone.MembraneSynth({
+      oscillator: { type: "sine" } as Tone.OmniOscillatorOptions,
+      "envelope": {
+        "attack": 0.001,
+        "decay": 0.4,
+        "sustain": 0.01,
+        "release": 1.4,
+        "attackCurve": "exponential"
+      },
+      "octaves": 10,
+      "pitchDecay": 0.1,
     }).toDestination(),
   );
 
