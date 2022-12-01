@@ -27,7 +27,7 @@ export function XylophoneKey({
   return (
 
     <div
-      onMouseDown={() => synth?.triggerAttackRelease(`${note}`, '6n')} //xylophones cant hold notes when pressed down
+      onMouseDown={() => synth?.triggerAttackRelease(`${note}`, '5n')} //xylophones cant hold notes when pressed down
       onMouseUp={() => synth?.triggerRelease('+0.005')} 
       className={classNames('ba pointer absolute dim')}
       style={{
@@ -38,7 +38,7 @@ export function XylophoneKey({
         height: '5rem',
         marginLeft: minor ? '0.25rem' : 0,
         color: 'black',
-        backgroundColor: '#C4A484'
+        backgroundColor: '#CD7F32'
       }}
     ></div>
   );

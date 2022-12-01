@@ -20,7 +20,7 @@ export const CircularVisualizer = new Visualizer(
   
       p5.noStroke();
 
-      p5.translate(halfWidth, height);
+      p5.translate(halfWidth-100, height);
   
       const values = analyzer.getValue(); //amp
 
@@ -36,16 +36,20 @@ export const CircularVisualizer = new Visualizer(
         const x = r * p5.sin(i);
         const y = r * p5.cos(i);
 
-        p5.vertex(x, y-(halfWidth/6)); //y-halfwidth/6 to center the circle in the window
+        p5.vertex(x, y); //y-halfwidth/6 to center the circle in the window
         p5.rotate(-90); //rotate to the left 90 degrees //x becomes y and y becomes x
 
-        p5.ellipse(halfHeight + p5.sin(p5.frameCount/2) * 150, -(halfWidth/6), 50 + 40*amplitude, 50 + 40*amplitude); //-90 for the center
+        p5.ellipse(halfHeight + p5.sin(p5.frameCount/2) * 150, 0, 50 + 40*amplitude, 50 + 40*amplitude);
+        p5.ellipse(halfHeight + p5.sin(p5.frameCount/2) * 120, 0, 40 + 40*amplitude, 40);
+        p5.ellipse(halfHeight + p5.sin(p5.frameCount/2) * 70, 0, 25 + 40*amplitude, 25 + 40*amplitude);
           
-        p5.ellipse(0, -(halfWidth/6) + p5.sin(p5.frameCount/2) * 200, 50 + 40*amplitude, 50 + 40*amplitude);
+        p5.ellipse(0, halfWidth/6 + p5.sin(p5.frameCount) * 300, 50 + 40*amplitude, 50 + 40*amplitude);
+        p5.ellipse(0, halfWidth/6 + p5.sin(p5.frameCount) * 270, 40, 40 + 40*amplitude);
+        p5.ellipse(0, halfWidth/6 + p5.sin(p5.frameCount) * 200, 25, 25 + 40*amplitude);
 
         p5.ellipse(
-          (-halfHeight/6)+p5.sin(p5.frameCount)*200,
-          (-halfHeight/6)+p5.sin(p5.frameCount)*200,
+          -(halfHeight/6)+p5.sin(p5.frameCount*1.5)*200,
+          -(halfHeight/6)+p5.sin(p5.frameCount*1.5)*200,
           45, 45);
       }
       p5.endShape();
