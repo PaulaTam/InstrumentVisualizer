@@ -3,6 +3,8 @@
 
 CSC 600 musical application.
 
+My contributions are the "Xylophone" and "Circular" options.
+
 ## Client
 
 The client contains the code which you will modify as part of the course. It constitutes the frontend (UI) portion of this web application.
